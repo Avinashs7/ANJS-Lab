@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="lib.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program</title>
+    <script>
+        
+       
+        var app=angular.module("App",[])
+        app.controller("Control",function($scope){
+                  
+           $scope.run1= function(num)
+            {
+            res=1;
+           for(let i=1; i<=num; i++)
+           res*=i
+            $scope.result1=res;
+            }
+            $scope.run2=function(num)
+             {
+                 $scope.result2=num*num;
+             }
+           
+        });
+        
+    </script>
+</head>
+<body ng-app="App" ng-controller="Control">
+    <input type="number" ng-model="num" ><br>
+    <table>
+        <tr>
+            <button ng-click="run1(num)">Factorial</button>
+            <button ng-click="run2(num)">Square Function</button>
+        </tr>
+    </table><hr>
+    Factorial:-  {{result1}} <br>
+
+   Square:- {{result2}}
+</body>
+
+</html>

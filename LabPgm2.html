@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="lib.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name</title>
+    <script>
+        if (arr==undefined){
+        var arr=[];
+        }
+        function add(item){
+            if(arr.indexOf(item)<0)
+            arr.push(item);
+        }
+        function dlt(item){
+            let ind=arr.indexOf(item);
+            if(arr.indexOf(item)>=0)
+            arr.splice(ind,1);    
+        }
+        function itemList(){
+            return arr;
+        }
+        var app=angular.module("App",[])
+        app.controller("Control",function($scope){
+           $scope.run1=add;
+           $scope.run2=dlt;
+           $scope.run=itemList;
+        })
+        
+    </script>
+</body>
+</head>
+<body ng-app="App" ng-controller="Control">
+    <input type="text" ng-model="item">
+    <button ng-click="run1(item)">Add</button>
+    <button ng-click="run2(item)">Delete</button>
+    {{run()}}
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="lib.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name</title>
+    <script>
+        function fullname(fname,lname){
+            if(fname==undefined || lname==undefined){
+                return;
+            }
+            return fname[0].toUpperCase()+fname.slice(1)+" "+lname.charAt(0).toUpperCase()+lname.slice(1);
+        }
+        var app=angular.module("App",[])
+        app.controller("Control",function($scope){
+           $scope.run=fullname;
+
+        })
+        
+    </script>
+</body>
+</head>
+<body ng-app="App" ng-controller="Control">
+    <p>First name</p><br>
+    <input type="text" ng-model="fname" value=" "><br>
+    <p>Last name</p><br>
+    <input type="text" ng-model="lname" value=" "><br>
+    {{run(fname,lname)}}
+</html>

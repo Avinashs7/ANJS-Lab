@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="lib.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+        var result=0;
+        function calc(ch,num)
+        {
+            if(isNaN(result)){result=0}
+            if( isNaN(num))
+            return;
+            switch(ch){
+                case '+':result+=num;
+                break;
+                case '-':result-=num;
+                break;
+                case '/':
+                if(num!=0 ){
+                    result/=num
+                }    
+                break;
+                case '*':result*=num;
+                break;
+            }
+        }
+        function print(){
+            return result;
+        }
+        var app=angular.module("App",[])
+        app.controller("Control",function($scope){
+            $scope.run=calc;
+            $scope.run1=print;
+        })
+        
+    </script>
+</body>
+</head>
+<body ng-app="App" ng-controller="Control">
+    <input type="number" ng-model="num" ><br>
+    <table>
+        <tr>
+            <button ng-click="run('+',num)">ADD</button>
+            <button ng-click="run('-',num)">SUB</button>
+            <button ng-click="run('/',num)">DIV</button>
+            <button ng-click="run('*',num)">MUL</button>
+        </tr>
+    </table><hr>
+    {{run1()}}
+</html>
