@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA</title>
+    <script src="lib.js"></script>
+    <script>
+        var app=angular.module('App',[]);
+        app.controller('control',function($scope){
+            $scope.students=[];
+            $scope.addStudent=function(){
+                if($scope.name && $scope.cgpa){
+                    $scope.students.push({
+                        name:$scope.name,
+                        cgpa:$scope.cgpa
+                    });
+                    $scope.name='';
+                    $scope.cgpa='';
+                }
+            };
+        });  
+    </script>
+    <style>
+        table ,td ,th{
+            border:1px solid black;
+            padding: 2px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body ng-controller="control">
+    <input type="text" ng-model="name"/>
+    <input type="number" ng-model="cgpa" ng-max="10" ng-min="1" step="0.01"/>
+    <button ng-click="addStudent()">Add Student</button><br>
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>CGPA</th>
+        </tr>
+        <tr ng-repeat="student in students">
+            <td>{{student.name}}</td>
+            <td>{{student.cgpa}}</td>
+        </tr>
+    </table>
+    <p>Total students:{{students.length}}</p>
+</body>
+</html>
