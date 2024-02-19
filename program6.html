@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <script src="lib.js"></script>
+    <script>
+        var app=angular.module('App',[]);
+        app.controller("control",function($scope){
+            $scope.tasks=[];
+            $scope.newTask="";
+            $scope.addTask=function(){
+                $scope.tasks.push($scope.newTask);
+                $scope.newTask="";
+            }
+            $scope.editTask=function(index){
+                var updatedTask=prompt("Enter the updated task");
+                if(updatedTask!=null){
+                    $scope.tasks.splice(index,1,updatedTask);
+                }
+            }
+            $scope.deleteTask=function(index){
+                var confirmDel=confirm("Are you sure you want to delete");
+                if(confirmDel){
+                    $scope.tasks.splice(index,1);      
+                }
+            }
+        });  
+    </script>
+    <style>
+        table{
+            margin-top: 20px;
+            align-items: center;
+        }
+        table ,td ,th{
+            border:1px solid black;
+            padding: 15px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body ng-controller="control">
+    <form ng-submit="addTask( )">
+        <label>Add task</label><br>
+        <input type="text" ng-model="newTask"/>
+        <button type="submit">Add task</button>
+    </form>
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="task in tasks">
+            <td>{{task}}</td>
+            <td>
+                <button ng-click="editTask($index)">Edit</button>
+                <button ng-click="deleteTask($index)">Delete</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
